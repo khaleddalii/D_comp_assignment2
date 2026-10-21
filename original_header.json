@@ -1,0 +1,20 @@
+{
+    "algorithm": "Modified Huffman",
+    "min_probability_limit": 0.15,
+    "codes": {
+        "a": "0",
+        "b": "10",
+        "Others": "11"
+    },
+    "original_codes": {
+        "a": "0000",
+        "b": "0001",
+        "c": "0010",
+        "d": "0011"
+    },
+    "original_code_length": 4,
+    "rare_symbols": [
+        "c",
+        "d"
+    ]
+}
