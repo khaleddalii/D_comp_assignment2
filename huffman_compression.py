@@ -43,14 +43,12 @@ def compress_text(text, min_limit):
     compressed_bits = []
     for char in text:
         if char in rare_symbols:
-            # Modified Huffman rule: Others prefix + fixed-width original symbol code.
             compressed_bits.append(codes[OTHERS] + original_codes[char])
         else:
             compressed_bits.append(codes[char])
 
     bit_stream = "".join(compressed_bits)
 
-    # Keep a list for readability and a mapping for decoding.
     overhead = {
         "algorithm": "Modified Huffman",
         "min_probability_limit": min_limit,
@@ -60,7 +58,6 @@ def compress_text(text, min_limit):
         "rare_symbols": sorted(rare_symbols),
     }
     return bit_stream, overhead
-
 
 def compress_file(input_file_path, output_txt_path, output_header_path, min_limit):
     input_path = Path(input_file_path)
@@ -75,8 +72,6 @@ def compress_file(input_file_path, output_txt_path, output_header_path, min_limi
 
     original_size = len(text.encode("utf-8"))
     compressed_bit_count = len(bit_stream)
-    # This ratio compares payload bits with the original UTF-8 file bits;
-    # it does not include JSON/header overhead.
     ratio = (
         (1 - compressed_bit_count / (original_size * 8)) * 100
         if original_size > 0
